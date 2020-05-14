@@ -1,1 +1,1 @@
-# catan-api-sockets
+# catan-sockets-manager
