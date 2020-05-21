@@ -9,7 +9,7 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 io.on("connection", (socket) => {
-  console.log("New client connected", socket.id.substr(0,6));
+  console.log("New client connected", socket.id.substr(0, 6));
 
   // When update recieved from one client, emit an update to all other clients
   socket.on("apiUpdateLocal", (data) => {
@@ -17,8 +17,13 @@ io.on("connection", (socket) => {
     socket.broadcast.emit('apiUpdate')
   });
 
+  socket.on("updateTimerLocal", (data) => {
+    console.log('update timer', data)
+    socket.broadcast.emit('updateTimer', data)
+  });
+
   socket.on("disconnect", () => {
-    console.log('Disconnected', socket.id.substr(0,6))
+    console.log('Disconnected', socket.id.substr(0, 6))
   });
 });
 
